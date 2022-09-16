@@ -8,41 +8,42 @@ import numpy as np
 import time
 import zmq
 
-context = zmq.Context()
-socket = context.socket(zmq.REP)
-socket.bind("tcp://*:5540")
+# context = zmq.Context()
+# socket = context.socket(zmq.REP)
+# socket.bind("tcp://*:5540")
 
 Data = serial.Serial()
 Data.baudrate = 38400
-Data.port = 'COM6'
+Data.port = 'COM4'
 Data.timeout =0.01
+Data.close()
 Data.open()
 # sio  = io.TextIOWrapper(io.BufferedRWPair(Data,Data,1),encoding='ascii',nweline='\r')
 # define serial port  
 
-app=pg.mkQApp()
-win = pg.GraphicsWindow()
-win.setWindowTitle('demo')
-win.resize(1600,900)
-xLength = 300
-fig1 = win.addPlot()
-fig1.showGrid(x=True, y=True)
-fig1.setRange(xRange=[0,xLength], padding=0)
-fig1.setLabel(axis = 'left', text='g')
-fig1.setLabel(axis = 'bottom',text='x / point')
-fig1.setTitle('acceleration')
+# app=pg.mkQApp()
+# win = pg.GraphicsWindow()
+# win.setWindowTitle('demo')
+# win.resize(1600,900)
+# xLength = 300
+# fig1 = win.addPlot()
+# fig1.showGrid(x=True, y=True)
+# fig1.setRange(xRange=[0,xLength], padding=0)
+# fig1.setLabel(axis = 'left', text='g')
+# fig1.setLabel(axis = 'bottom',text='x / point')
+# fig1.setTitle('acceleration')
 
-curve1 = fig1.plot()
-curve2 = fig1.plot()
-curve3 = fig1.plot()
+# curve1 = fig1.plot()
+# curve2 = fig1.plot()
+# curve3 = fig1.plot()
 
-data = [np.zeros(xLength).__array__('d'),
-        np.zeros(xLength).__array__('d'),
-        np.zeros(xLength).__array__('d')] 
-# 定义缓冲区长度
-buffer_length = 10
-edge =2.5
-buffer = np.zeros((buffer_length,3)) 
+# data = [np.zeros(xLength).__array__('d'),
+#         np.zeros(xLength).__array__('d'),
+#         np.zeros(xLength).__array__('d')] 
+# # 定义缓冲区长度
+# buffer_length = 10
+# edge =2.5
+# buffer = np.zeros((buffer_length,3)) 
 # initial figure  and data which need to save
 
 # def placement(singal,prev_placement):
@@ -155,23 +156,24 @@ def plotData():
         curve1.setData(data[0],pen=pg.mkPen('g',width=3))
         curve2.setData(data[1],pen=pg.mkPen('r',width=3))
         curve3.setData(data[2],pen=pg.mkPen('b',width=3))
-        buffer[0] = signal
-        buffer[1:,:]= buffer[:-1,:]
-        motivation = motivation_test_new(buffer)
-        print(motivation)
-        message = socket.recv()
-        socket.send_string(motivation)
+        # buffer[0] = signal
+        # buffer[1:,:]= buffer[:-1,:]
+        # motivation = motivation_test_new(buffer)
+        # print(motivation)
+        # message = socket.recv()
+        # socket.send_string(motivation)
 
 
         # socket.send_string(motivation)
 # function to plot data 
 
-# while True:
-#     signal = Data.readline()
-#     signal = dataProcess(signal)
-#     if signal == None or signal[0] == None or signal[2] ==None : continue
-#     else: 
-#         print(signal)
+while True:
+    signal = Data.readline()
+    print(signal)
+    # signal = dataProcess(signal)
+#     # if signal == None or signal[0] == None or signal[2] ==None : continue
+#     # else: 
+#     #     print(signal)
 #     # print(Data)
 #     # signal = Data.readline()
 #     # print(signal)
