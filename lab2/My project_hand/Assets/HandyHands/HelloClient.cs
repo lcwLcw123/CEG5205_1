@@ -24,7 +24,7 @@ public class HelloClient : MonoBehaviour
             m_transform.Translate(Vector3.right * Time.deltaTime * speed);
         }
         //forward
-        if (_helloRequester.last_motivation == "foaward")
+        if (_helloRequester.last_motivation == "forward")
         {
 
             m_transform.Translate(Vector3.forward * Time.deltaTime * speed);

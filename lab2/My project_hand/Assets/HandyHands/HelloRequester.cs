@@ -28,7 +28,8 @@ public class HelloRequester : RunAbleThread
         using (RequestSocket client = new RequestSocket())
         {
             client.Connect("tcp://localhost:5540");
-            for (int i = 0; i < 100000000 && Running; i++)
+            // for (int i = 0; i < 10 && Running; i++)
+            while(Running)
             {
                 // Debug.Log("Sending Hello");
                 client.SendFrame("");
